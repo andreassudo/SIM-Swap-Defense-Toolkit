@@ -1,0 +1,7 @@
+# Search for suspicious account recovery and number-change activity
+index=identity sourcetype=auth OR sourcetype=mfa OR sourcetype=support
+| eval event_time=strptime(_time, "%Y-%m-%dT%H:%M:%S.%3N%z")
+| search (event="password_reset" OR event="mfa_failure" OR event="phone_update" OR event="recovery_request")
+| stats count by user, event, src_ip, geo_country, device_id, _time
+| where count >= 2
+| sort - _time

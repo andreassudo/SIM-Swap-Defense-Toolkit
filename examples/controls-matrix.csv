@@ -1,0 +1,6 @@
+# Controls matrix
+
+account_recovery,number_change,mfa_reset,device_trust,support_verification,carrier_escalation
+high_risk,true,true,true,true,true
+medium_risk,true,true,true,true,false
+low_risk,false,false,false,false,false

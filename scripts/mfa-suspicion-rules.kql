@@ -1,0 +1,22 @@
+// Microsoft Sentinel / Azure Monitor KQL examples for SIM-swap risk monitoring
+// Use as a starting point for identity and account-security detections.
+
+let riskWindow = 1h;
+let usersWithRecentRecovery =
+    AuditLogs
+    | where TimeGenerated > ago(7d)
+    | where OperationName has_any ("PasswordReset", "UpdateAuthenticationMethod", "PhoneNumberChange", "UserRegisteredSecurityInfo")
+    | extend UserId = tostring(UserId)
+    | summarize RecoveryEvents = count() by UserId, bin(TimeGenerated, riskWindow);
+
+let usersWithMfaAnomaly =
+    SigninLogs
+    | where TimeGenerated > ago(7d)
+    | where ResultType !in ("0", "50125", "50140")
+    | where AppDisplayName has_any ("Office", "Azure", "Portal")
+    | summarize MfaFailures = count() by UserPrincipalName, bin(TimeGenerated, riskWindow);
+
+usersWithRecentRecovery
+| join kind=inner usersWithMfaAnomaly on $left.UserId == $right.UserPrincipalName
+| where RecoveryEvents >= 2 and MfaFailures >= 2
+| project UserId, TimeGenerated, RecoveryEvents, MfaFailures
