@@ -1,18 +1,18 @@
-# SIM Swap Defense Toolkit
+# SIM-Swap Defense Toolkit
 
-A defensive guide and operational playbook for detecting, preventing, and responding to SIM-swap fraud and account takeover attempts.
+A defensive toolkit for detecting, preventing, and responding to SIM-swap fraud and account takeover attempts.
 
-This repository is intentionally focused on protection, detection, and resilience. It does not provide instructions for impersonating carriers, bypassing MFA, or performing account takeover.
+This repository is focused on identity protection, security operations, and account resilience. It contains practical guidance for defenders, security engineers, fraud teams, and support organizations working to reduce the risk of mobile-number takeover.
 
 ## Why this matters
 
-SIM swaps remain one of the highest-risk identity takeover vectors because they let attackers silently take control of the phone number used for MFA, recovery, and account notifications. The result is often a rapid pivot from a low-risk fraud attempt into a full account takeover or identity theft incident.
+SIM swap fraud remains one of the most dangerous identity takeover vectors because it can silently take over the phone number used for MFA, recovery, and account notifications. Attackers may exploit carrier workflows, social engineering, or support abuse to gain access to a user’s trusted identity channel.
 
 This toolkit is designed for:
 - security engineering teams
 - identity and access administrators
-- help desk and account recovery teams
 - fraud and risk operations
+- help desk and account recovery teams
 - customer support leadership
 
 ## What is included
@@ -20,8 +20,8 @@ This toolkit is designed for:
 - threat model and risk overview
 - detection engineering for shipping, telecom, and identity events
 - verification playbooks for support and trust teams
-- response workflows for account compromise, suspicious port-outs, and service disruptions
-- sample SIEM/Log Analytics queries and alert logic
+- incident response workflows for account compromise and suspicious port-outs
+- sample SIEM and log-analytics detection logic
 - escalation templates and forensic checklists
 
 ## Repository layout
